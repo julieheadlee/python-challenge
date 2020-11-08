@@ -60,15 +60,16 @@ text_lines.append(f"Average Change: ${totavgTotalChange}")
 text_lines.append(f"Greatest Increase in Profits: {gIncProfitDate} (${gIncProfitAmt})")
 text_lines.append(f"Greatest Decrease in Profits: {gDecProfitDate} (${gDecProfitAmt})")
 # Save the report as analysis.txt
-analysis_path = os.path.join(".", "analysis", "analysis.csv")
+analysis_path = os.path.join(".", "analysis", "analysis.txt")
 
 
 # Open the file using "write" mode. Specify the variable to hold the contents
 with open(analysis_path, 'w', newline='') as analysis_file:
     # Initialize analysis.writer
-    analysis_writer = csv.writer(analysis_file, delimiter=',')
+    #analysis_writer = csv.writer(analysis_file, delimiter=',')
+    
     for row in text_lines:
-        analysis_writer.writerow(row)
+        analysis_file.write(row + "\n")
         print(row)
 
 
