@@ -17,7 +17,7 @@ text_lines = []   # holds the analysis text
 
 # open the budget_data.csv file
 rawdata_path = os.path.join(".", 'Resources', 'budget_data.csv')
-print(os.getcwd)
+
 with open(rawdata_path, encoding="utf8") as rawdata_file:
 
     # CSV reader specifies delimiter and variable that holds contents
