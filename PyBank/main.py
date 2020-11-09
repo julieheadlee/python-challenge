@@ -27,14 +27,14 @@ with open(rawdata_path, encoding="utf8") as rawdata_file:
 
     # store the header -- we don't use it anywhere though
     file_header = rawdata_reader
+    
     # Read each row of data after the header
     next(rawdata_reader, None)
     for row in rawdata_reader:
         # update month count
-        #need if statement to test what row we're on
         month_count = month_count + 1
-        # update net total amount of P/L
         
+        # update net total amount of P/L
         netTotalAmt = netTotalAmt + int(row[1])
         
         # get the change in P/L from last month    
@@ -50,6 +50,7 @@ with open(rawdata_path, encoding="utf8") as rawdata_file:
         if changePL < gDecProfitAmt:
             gDecProfitAmt = changePL
             gDecProfitDate = row[0]
+        # set prevAmt to current line to prepare for next row
         prevAmt = int(row[1])
 
 # calculate the Average Change
@@ -63,15 +64,13 @@ text_lines.append(f"Total: ${netTotalAmt}")
 text_lines.append(f"Average Change: ${totavgTotalChange}")
 text_lines.append(f"Greatest Increase in Profits: {gIncProfitDate} (${gIncProfitAmt})")
 text_lines.append(f"Greatest Decrease in Profits: {gDecProfitDate} (${gDecProfitAmt})")
+
 # Save the report as analysis.txt
 analysis_path = os.path.join(".", "analysis", "analysis.txt")
 
-
 # Open the file using "write" mode. Specify the variable to hold the contents
 with open(analysis_path, 'w', newline='') as analysis_file:
-    # Initialize analysis.writer
-    #analysis_writer = csv.writer(analysis_file, delimiter=',')
-    
+ 
     for row in text_lines:
         analysis_file.write(row + "\n")
         print(row)
