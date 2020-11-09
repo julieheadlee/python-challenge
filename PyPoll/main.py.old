@@ -3,20 +3,17 @@
 
 import os
 import csv
-import decimal 
 
 # Pseudo code
 #  1. Read rows of input file, pull candidate and number of votes.
 #  2. Using a dictionary, each Candidate and vote totals
 #  3. Save and print to console.
- 
+
 # Declare and initialize variables
 vote_d = {}
 total_vote = 0
 text_lines = []
-
-# declare the decimal places as 3
-decimal.getcontext = 5
+header = ""
 
 # open input file election_data.csv
 rawdata_path = os.path.join(".", 'Resources', 'election_data.csv')
@@ -26,6 +23,9 @@ with open(rawdata_path, encoding="utf8") as rawdata_file:
     # CSV reader specifies delimiter and variable that holds contents
     rawdata_reader = csv.reader(rawdata_file, delimiter=',')
 
+    # store header -- we do not use this later
+    header = rawdata_reader
+    print(header)
     # Read each row of data after the header
     next(rawdata_reader, None)
     for row in rawdata_reader:
@@ -52,8 +52,9 @@ text_lines.append("-----------------------")
 text_lines.append(f"Total Votes: {total_vote}")
 text_lines.append("-----------------------")
 for candidate in vote_d:
-    text_lines.append(f"{candidate}: {round((vote_d[candidate]/total_vote)*100,5)}% ({vote_d[candidate]})")
-    #text_lines.append(f"{candidate}: {decimal.Decimal((vote_d[candidate]/total_vote)*100)}% ({vote_d[candidate]})")
+    vote = int(vote_d(candidate))
+    per_vote = ((vote/total_vote)/total_vote)*100
+    text_lines(f"{candidate}: {round(per_vote,4)}% ({vote})")
 text_lines.append("-----------------------")
 text_lines.append(f"Winner: {highest}")
 text_lines.append("-----------------------")
@@ -69,3 +70,7 @@ with open(analysis_path, 'w', newline='') as analysis_file:
     for row in text_lines:
         analysis_file.write(row + "\n")
         print(row)
+
+
+        
+            

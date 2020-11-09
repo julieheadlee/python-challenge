@@ -14,6 +14,8 @@ gIncProfitAmt = 0
 gDecProfitDate = ""
 gDecProfitAmt = 0
 text_lines = []   # holds the analysis text
+file_header = ""
+
 
 # open the budget_data.csv file
 rawdata_path = os.path.join(".", 'Resources', 'budget_data.csv')
@@ -23,6 +25,8 @@ with open(rawdata_path, encoding="utf8") as rawdata_file:
     # CSV reader specifies delimiter and variable that holds contents
     rawdata_reader = csv.reader(rawdata_file, delimiter=',')
 
+    # store the header -- we don't use it anywhere though
+    file_header = rawdata_reader
     # Read each row of data after the header
     next(rawdata_reader, None)
     for row in rawdata_reader:
