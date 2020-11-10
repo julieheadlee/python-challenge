@@ -54,7 +54,7 @@ with open(rawdata_path, encoding="utf8") as rawdata_file:
         prevAmt = int(row[1])
 
 # calculate the Average Change
-totavgTotalChange = round(totalChangePL/month_count, 2)
+totavgTotalChange = round(totalChangePL/(month_count - 1), 2)
 
 # create text_lines
 text_lines.append("Financial Analysis")
